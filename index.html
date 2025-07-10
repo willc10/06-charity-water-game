@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pump It Up!</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Fredoka:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <!-- Big logo at the top -->
+    <img src="img/logo.jpg" alt="Charity Water Logo" style="display: block; margin: 0 auto 20px auto; max-width: 100%; height: 140px;">
+    <h1>Pump It Up!</h1>
+    <p>Hit the water when it is in the circle to fill the bucket at the bottom!</p>
+
+    <div class="controls">
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <button id="startBtn">Start</button>
+    </div>
+
+    <div class="game-area-container">
+      <div class="game-area">
+        <div class="lane" data-key="w">
+          <div class="hit-zone">
+            <div class="hit-circle"></div>
+          </div>
+        </div>
+        <div class="lane" data-key="a">
+          <div class="hit-zone">
+            <div class="hit-circle"></div>
+          </div>
+        </div>
+        <div class="lane" data-key="s">
+          <div class="hit-zone">
+            <div class="hit-circle"></div>
+          </div>
+        </div>
+        <div class="lane" data-key="d">
+          <div class="hit-zone">
+            <div class="hit-circle"></div>
+          </div>
+        </div>
+      </div>
+      <div class="key-labels">
+        <div class="key red">W</div>
+        <div class="key green">A</div>
+        <div class="key yellow">S</div>
+        <div class="key blue">D</div>
+      </div>
+    </div>
+
+    <div class="water-system">
+      <div class="bucket">
+        <img src="img/water-can-transparent.png" alt="Jerrycan Icon" class="jerrycan-icon">
+        <div class="fill"></div>
+      </div>
+      <p id="status"></p>
+    </div>
+
+    <div id="pauseIcon" style="position: absolute; top: 20px; right: 30px; font-size: 32px; cursor: pointer; z-index: 10;">⏸️</div>
+    <div id="pauseMenu" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 20; justify-content: center; align-items: center;">
+      <div style="background: white; padding: 30px 40px; border-radius: 12px; text-align: center;">
+        <h2>Game Paused</h2>
+        <button id="resumeBtn">Resume</button>
+        <button id="resetBtn">Reset</button>
+        <button id="exitBtn">Exit</button>
+        <br><br>
+        <label for="pauseDifficulty">Reset Difficulty:</label>
+        <select id="pauseDifficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="winScreen" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.0); z-index:30; justify-content:center; align-items:center;">
+      <div id="winBox" style="background: white; padding: 32px 48px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); text-align: center; border: 3px solid #2E9DF7;">
+        <div id="confetti" style="font-size:48px; margin-bottom:20px;">🎉🎉🎉</div>
+        <h2 style="color:#2E9DF7;">Congratulations!</h2>
+        <p style="color:#159A48;"> <a href="https://www.charitywater.org/" target="_blank" style="color:#159A48; text-decoration:underline;">
+            Click here to learn more about our company!
+          </a>
+        </p>
+        <button id="playAgainBtn" style="margin-top:16px; padding:10px 24px; font-size:18px; background:#2E9DF7; color:white; border:none; border-radius:8px; cursor:pointer;">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
