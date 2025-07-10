@@ -28,6 +28,7 @@ let isPaused = false;
 let gameRunning = false; // Track if a game is running
 
 startBtn.addEventListener('click', startGame);
+startBtn.addEventListener('touchstart', startGame);
 
 let dropsPerSpawn = 1;
 let animationFrameId; // Store the animation frame ID
