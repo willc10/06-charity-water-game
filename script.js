@@ -1,22 +1,23 @@
-console.log('JavaScript file is linked correctly.');
-
 const startBtn = document.getElementById('startBtn');
 const difficultySelect = document.getElementById('difficulty');
 const gameArea = document.querySelector('.game-area');
 const bucketFill = document.querySelector('.fill');
 const statusText = document.getElementById('status');
-
-// Get pause menu elements
 const pauseIcon = document.getElementById('pauseIcon');
 const pauseMenu = document.getElementById('pauseMenu');
 const resumeBtn = document.getElementById('resumeBtn');
 const resetBtn = document.getElementById('resetBtn');
 const pauseDifficulty = document.getElementById('pauseDifficulty');
-const exitBtn = document.getElementById('exitBtn'); // Get the exit button
-
+const exitBtn = document.getElementById('exitBtn'); 
 const winScreen = document.getElementById('winScreen');
 const playAgainBtn = document.getElementById('playAgainBtn');
 const confetti = document.getElementById('confetti');
+const buttonSound = document.getElementById('buttonSound');
+const pauseSound = document.getElementById('pauseSound');
+const mainMusic = document.getElementById('mainMusic');
+const waterDropSound = document.getElementById('waterDropSound');
+const winSound = document.getElementById('winSound'); 
+const errorSound = document.getElementById('errorSound');
 
 const lanes = ['w', 'a', 's', 'd'];
 let gameInterval;
@@ -33,7 +34,13 @@ startBtn.addEventListener('touchstart', startGame);
 let dropsPerSpawn = 1;
 let animationFrameId; // Store the animation frame ID
 
+function playSound(audio) {
+  audio.currentTime = 0;
+  audio.play();
+}
+
 function startGame() {
+  buttonSound.play();
   isPaused = false;
   gameRunning = true; // Game is now running
   startBtn.style.display = 'none';
@@ -66,6 +73,8 @@ function startGame() {
 
   beatInterval = setInterval(spawnBeat, 1000);
   animationFrameId = requestAnimationFrame(updateBeats);
+  mainMusic.currentTime = 0;
+  mainMusic.play();
 }
 
 function spawnBeat() {
@@ -128,6 +137,7 @@ document.addEventListener('keydown', (e) => {
 
 // Function to add water when player hits correctly
 function addWater() {
+  playSound(waterDropSound);
   fillPercent += 5;
   if (fillPercent > 100) {
     fillPercent = 100;
@@ -143,6 +153,8 @@ function addWater() {
 
 // Function to subtract water as a penalty
 function loseWater() {
+  playSound(errorSound); 
+  // add sound effect for losing water
   fillPercent -= 5;
   if (fillPercent < 0) {
     fillPercent = 0;
@@ -177,6 +189,8 @@ function showPauseMenu() {
     cancelAnimationFrame(animationFrameId);
   }
   clearInterval(beatInterval);
+  playSound(pauseSound);
+  mainMusic.pause();
 }
 
 // Hide pause menu and resume game
@@ -190,6 +204,7 @@ function resumeGame() {
 
   // Only resume animation and beat spawning if the game is running
   if (gameRunning) {
+    mainMusic.play();
     // Update dropsPerSpawn and fallSpeed to match the new difficulty
     const difficulty = difficultySelect.value;
     if (difficulty === 'medium') {
@@ -218,6 +233,7 @@ function resetGame() {
 
 // Exit button event listener
 exitBtn.addEventListener('click', () => {
+  buttonSound.play();
   // Hide the pause menu
   pauseMenu.style.display = 'none';
   // Stop the game
@@ -241,6 +257,9 @@ exitBtn.addEventListener('click', () => {
 
 // Show the win screen and confetti
 function showWinScreen() {
+  mainMusic.pause();
+  winSound.currentTime = 0;
+  winSound.play();
   winScreen.style.display = 'flex';
   // Simple confetti animation using emojis
   let confettiInterval = setInterval(() => {
@@ -249,6 +268,7 @@ function showWinScreen() {
 
   // Stop confetti animation when win screen is hidden
   playAgainBtn.onclick = () => {
+    winSound.pause();
     clearInterval(confettiInterval);
     winScreen.style.display = 'none';
     // Reset the game to the original state (like exit)
@@ -285,11 +305,13 @@ pauseIcon.addEventListener('click', () => {
 
 // Resume button
 resumeBtn.addEventListener('click', () => {
+  buttonSound.play();
   resumeGame();
 });
 
 // Reset button
 resetBtn.addEventListener('click', () => {
+  buttonSound.play();
   resetGame();
 });
 

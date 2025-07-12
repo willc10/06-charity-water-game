@@ -267,6 +267,27 @@ p {
   cursor: pointer;
 }
 
+.charity-footer {
+  width: 100%;
+  background: var(--blue);
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 1rem;
+  z-index: 40;
+  letter-spacing: 0.5px;
+}
+
+.charity-footer a {
+  color: var(--yellow);
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 /* Responsive styles for phones and small screens */
 @media (max-width: 600px) {
   .game-container {
@@ -403,5 +424,13 @@ p {
 
   img[alt="Charity Water Logo"] {
     height: 70px !important;
+  }
+
+  .charity-footer {
+    padding: 5px 0;
+    font-size: 0.9rem;
+  }
+  .charity-footer a {
+    font-size: 0.9rem;
   }
 }
