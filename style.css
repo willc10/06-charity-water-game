@@ -269,7 +269,7 @@ p {
 
 .charity-footer {
   width: 100%;
-  background: var(--blue);
+  background: rgb(0, 0, 255);
   color: white;
   text-align: center;
   padding: 8px 0;
